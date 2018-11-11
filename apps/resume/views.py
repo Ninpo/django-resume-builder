@@ -3,7 +3,17 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 
 from .forms import ResumeItemForm
-from .models import ResumeItem
+from .models import Resume, ResumeItem
+
+
+@login_required
+def resume_list_view(request):
+    """
+    List the user's resumes
+    """
+    resumes = Resume.objects.filter(user=request.user).order_by('title')
+
+    return render(request, 'resume/resume_list.html', {'resumes': resumes})
 
 
 @login_required
