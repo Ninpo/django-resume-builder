@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Resumes(models.Model):
+class Resume(models.Model):
     """
     Collection of Resumes linked to users.
     """
@@ -17,7 +17,7 @@ class ResumeItem(models.Model):
     A single resume item, representing a job and title held over a given period
     of time.
     """
-    resume = models.ForeignKey(Resumes)
+    resume = models.ForeignKey(Resume)
 
     title = models.CharField(max_length=127)
     company = models.CharField(max_length=127)
