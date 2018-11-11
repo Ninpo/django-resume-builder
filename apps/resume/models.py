@@ -1,12 +1,23 @@
 from django.db import models
 
 
+class Resumes(models.Model):
+    """
+    Collection of Resumes linked to users.
+    """
+    user = models.ForeignKey('auth.User')
+    title = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.title
+
+
 class ResumeItem(models.Model):
     """
     A single resume item, representing a job and title held over a given period
     of time.
     """
-    user = models.ForeignKey('auth.User')
+    resume = models.ForeignKey(Resumes)
 
     title = models.CharField(max_length=127)
     company = models.CharField(max_length=127)
