@@ -1,0 +1,79 @@
+{% extends "base_logged_in.html" %}
+
+{% comment %}
+Template for viewing a resume.
+{% endcomment %}
+
+{% block styles %}
+  {{ block.super }}
+
+  <style>
+    div.resume-container {
+      margin: 24px auto 0;
+    }
+
+    section.resume-item {
+      margin-top: 36px;
+
+      position: relative;
+    }
+
+    section.resume-item > a.btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    div.resume-container > a.btn {
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+.divTable{
+	display: table;
+	width: 100%;
+}
+.divTableRow {
+	display: table-row;
+}
+
+.divTableCell {
+	border: none;
+	display: table-cell;
+	padding: 3px 10px;
+}
+
+.divTableBody {
+	display: table-row-group;
+}
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container resume-container content-section">
+    <h1>Resumes</h1>
+    <div class="divTable">
+      <div class="divTableBody">
+      {% for resume in resumes %}
+        <div class="divTableRow">
+      <section class="resume-item">
+        <div class="divTableCell" style="width: 300pt">
+          <h3>{{ resume.title }}</h3>
+        </div>
+        <div class="divTableCell">
+          <h4>{{ resume.num_items}} Items</h4>
+        </div>
+        <div class="divTableCell">
+           <a href="{% url 'resume' resume_id=resume.id %}" class="btn btn-primary" name="editResume">Edit</a>
+        </div>
+        <div class="divTableCell">
+          <a href="{% url 'resume-edit' resume_id=resume.id %}" class="btn btn-primary" name="renameResume">Rename</a>
+        </div>
+      </section>
+        </div>
+    {% endfor %}
+      </div>
+    </div>
+    <a href="{% url 'resume-create' %}" class="btn btn-primary" name="createResume">Create New Resume</a>
+
+  </div>
+{% endblock %}

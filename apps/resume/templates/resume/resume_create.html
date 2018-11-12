@@ -1,0 +1,68 @@
+{% extends "base_logged_in.html" %}
+{% block styles %}
+  {{ block.super }}
+
+  <style>
+    div.resume-item-form-container {
+      margin-top: 24px;
+    }
+
+    h1.resume-item-header {
+      margin-bottom: 24px;
+    }
+
+    textarea#inputDescription {
+      height: 120px;
+    }
+  </style>
+{% endblock %}
+
+{% comment %}
+Template for creating a resume.
+{% endcomment %}
+
+{% block resume_item_header_text %}Create resume{% endblock %}
+{% block content %}
+  <div class="container-fluid">
+
+    <div class="row content-section resume-item-form-container">
+
+      <div class="col-xs-12">
+
+    <form class="form-horizontal" action="" method="post">
+      {% csrf_token %}
+
+      <div class="row">
+
+        <div class="col-sm-6">
+          {{ form.title.errors }}
+          <div class="form-group">
+            <label for="resumeTitle" class="col-sm-2 control-label">Resume Title</label>
+            <div class="col-sm-8">
+              <input type="text" name="title" id="resumeTitle"
+                     required maxlength="127"
+                     class="form-control" aria-label="resumeTitle"
+                     {% if form.title.value %}value="{{ form.title.value }}"{% endif %}>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-11 submit-col">
+              <button type="submit" class="btn btn-primary">
+                {% block resume_item_submit_button_text %}Create{% endblock %}
+              </button>
+              <a class="btn btn-default" href="/resumes/">Back</a>
+
+              {% block resume_item_additional_buttons %}{% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
