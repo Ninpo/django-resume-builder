@@ -51,6 +51,9 @@ Template for viewing a resume.
 {% endblock %}
 
 {% block content %}
+<div class="container content-section resume-container">
+  <h3>Resume: {{ resume_title }}</h3>
+</div>
   <div class="container content-section resume-container">
     <div class="header-center-container">
       <div class="header-container">
@@ -65,10 +68,10 @@ Template for viewing a resume.
         <h4>{{ resume_item.company }}</h4>
         <h4>{{ resume_item.start_date | date:"M Y"}} - {% if resume_item.end_date %}{{ resume_item.end_date | date:"M Y"}}{% else %}Present{% endif %}</h4>
         {% if resume_item.description %}<p>{{ resume_item.description }}</p>{% endif %}
-        <a class="btn btn-primary" href="/resume/item/edit/{{ resume_item.id }}/">Edit</a>
+        <a class="btn btn-primary" href="{% url 'resume-item-edit' resume_id=resume_id resume_item_id=resume_item.id %}">Edit</a>
       </section>
     {% endfor %}
 
-    <a class="btn btn-success" href="/resume/item/create/">Add New Item</a>
+    <a class="btn btn-success" href="{% url 'resume-item-create' resume_id=resume_id %}">Add New Item</a>
   </div>
 {% endblock %}
