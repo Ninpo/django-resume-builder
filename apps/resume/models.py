@@ -29,7 +29,7 @@ class ResumeItem(models.Model):
     description = models.TextField(max_length=2047, blank=True)
 
     def __unicode__(self):
-        return "{}: {} at {} ({})".format(self.user.username,
+        return "{}: {} at {} ({})".format(self.resume.title,
                                           self.title,
                                           self.company,
                                           self.start_date.isoformat())
