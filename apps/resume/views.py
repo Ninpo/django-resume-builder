@@ -97,7 +97,7 @@ def resume_item_edit_view(request, resume_id, resume_item_id):
     if request.method == 'POST':
         if 'delete' in request.POST:
             resume_item.delete()
-            return redirect(resume_view)
+            return redirect(resume_view, resume_id)
 
         form = ResumeItemForm(request.POST, instance=resume_item)
         if form.is_valid():
