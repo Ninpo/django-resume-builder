@@ -27,13 +27,16 @@ urlpatterns = [
     url('^login/$', auth_views.LoginView.as_view(), name='login'),
     url('^logout/$', auth_views.LogoutView.as_view(), name='logout'),
 
-    url(r'^$', RedirectView.as_view(pattern_name='resume')),
+    url(r'^$', RedirectView.as_view(pattern_name='resumes')),
 
-    url(r'^resume/$', resume_views.resume_view, name='resume'),
-    url(r'^resume/item/edit/(\d+)/$', resume_views.resume_item_edit_view,
-        name='resume-item-edit'),
-    url(r'^resume/item/create/$', resume_views.resume_item_create_view,
+    url(r'^resumes/$', resume_views.resume_list_view, name='resumes'),
+    url(r'^resumes/(?P<resume_id>\d+)/$',resume_views.resume_view, name='resume'),
+    url(r'^resumes/(?P<resume_id>\d+)/edit/$', resume_views.resume_edit_view, name='resume-edit'),
+    url(r'^resumes/(?P<resume_id>\d+)/item/create/$', resume_views.resume_item_create_view,
         name='resume-item-create'),
+    url(r'^resumes/create/$', resume_views.resume_create_view, name="resume-create"),
+    url(r'^resumes/(?P<resume_id>\d+)/item/edit/(?P<resume_item_id>\d+)$', resume_views.resume_item_edit_view,
+        name='resume-item-edit'),
 
     url(r'^user/$', user_views.account_edit_view, name='account-edit'),
     url(r'^create-account/$', user_views.account_create_view,
